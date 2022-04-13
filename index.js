@@ -1,14 +1,14 @@
-const axios = require('axios')
+require('dotenv').config();
+const axios = require('axios');
 const url = 'https://api.app.shortcut.com/api/v3/projects';
-const key = '6256c8a6-7715-4dc3-b6d9-2e5e3f11e7f4';
+const key = process.env.KEY ?? '6256c8a6-7715-4dc3-b6d9-2e5e3f11e7f4';
 const fs = require('fs');
 const args = require('minimist')(process.argv.slice(2))
 const axiosConfig = {
-  headers: {'Shortcut-Token': '6256c8a6-7715-4dc3-b6d9-2e5e3f11e7f4'},
+  headers: {'Shortcut-Token': key},
 }
 console.log('run');
 console.log('args', args)
-
 
 async function get() {
   try {
