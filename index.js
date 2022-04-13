@@ -22,16 +22,20 @@ async function get() {
 
 function getProjects(arr) {
   let ids = getId()
-  return arr.filter(el=> ids.includes(el.id))
+  const filtered = arr.filter(el => ids.includes(el.id))
+  return filtered.map(el => {
+    const {id, name, description} = el;
+    return {id,name, description};
+  })
 }
 
 function getId() {
   console.log(typeof args['p'])
-  return typeof args['p'] === 'number'? [args['p']]: args['p'].split(',').map(el=>Number(el))
+  return typeof args['p'] === 'number' ? [args['p']] : args['p'].split(',').map(el => Number(el))
 }
 
-function write(data){
-  const stringData = JSON.stringify(data,null, 4)
+function write(data) {
+  const stringData = JSON.stringify(data, null, 4)
   fs.writeFile(args['o'], stringData, (err) => {
     if (err) {
       throw err;
