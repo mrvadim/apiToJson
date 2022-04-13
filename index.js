@@ -11,14 +11,14 @@ console.log('run');
 console.log('args', args)
 
 async function get() {
-  let res = [];
   try {
-    res = await axios.get(url, axiosConfig)
+    const res = await axios.get(url, axiosConfig)
+    const data = getProjects(res.data)
+    write(data)
   } catch (e) {
     console.log(e)
   }
-  const data = getProjects(res.data)
-  write(data)
+
 }
 
 function getProjects(arr) {
