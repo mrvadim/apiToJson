@@ -11,13 +11,14 @@ console.log('run');
 console.log('args', args)
 
 async function get() {
+  let res = [];
   try {
-    const res = await axios.get(url, axiosConfig)
-    const data = await getProjects(res.data)
-    await write(data)
+    res = await axios.get(url, axiosConfig)
   } catch (e) {
     console.log(e)
   }
+  const data = getProjects(res.data)
+  write(data)
 }
 
 function getProjects(arr) {
@@ -30,7 +31,6 @@ function getProjects(arr) {
 }
 
 function getId() {
-  console.log(typeof args['p'])
   return typeof args['p'] === 'number' ? [args['p']] : args['p'].split(',').map(el => Number(el))
 }
 
